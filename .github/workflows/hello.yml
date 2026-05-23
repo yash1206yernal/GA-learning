@@ -13,3 +13,9 @@ jobs:
 
       - name: Show Files
         run: ls -la
+
+      - name: Show Current Directory
+        run: pwd
+
+      - name: Show Date and Time
+        run: date
