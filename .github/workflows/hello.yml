@@ -24,3 +24,6 @@ jobs:
         
       - name: Print Current User
         run: whoami
+
+      - name: Ping Google
+        run: ping google.com
