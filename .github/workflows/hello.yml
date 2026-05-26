@@ -12,10 +12,12 @@ jobs:
       - name: Job 1 Message
         run: echo "This is Job 1"
 
-      - name: Show Date
-        run: date
+      - name: Sleep for 10 seconds
+        run: sleep 10
 
   job2:
+    needs: job1
+
     runs-on: ubuntu-latest
 
     steps:
