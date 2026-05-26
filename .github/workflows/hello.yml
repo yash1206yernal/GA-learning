@@ -22,8 +22,7 @@ jobs:
       - name: Show Date and Time
         run: date
         
-      - name: Print Current User
+      - name: Print Current User-status
         run: whoami
 
-      - name: Ping Google
-        run: ping google.com
+  
