@@ -2,6 +2,8 @@ name: My First Workflow
 
 on:
   push:
+    branches: 
+      - main
   pull_request:
   workflow_dispatch:
 
@@ -22,7 +24,7 @@ jobs:
       - name: Show Date and Time
         run: date
         
-      - name: Print Current User-status
+      - name: Print Current User
         run: whoami
 
   
