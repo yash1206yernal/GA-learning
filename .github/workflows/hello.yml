@@ -1,4 +1,4 @@
-name: Day 5 Workflow
+name: Day 5 Workflows
 
 on:
   workflow_dispatch:
