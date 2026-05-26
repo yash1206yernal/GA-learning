@@ -25,7 +25,7 @@ jobs:
         run: echo "Running tests..."
 
       - name: Sleep Test
-        run: sleep kmgm
+        run: sleep 10
 
   deploy:
     needs: test
