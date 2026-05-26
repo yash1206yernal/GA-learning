@@ -1,22 +1,26 @@
-name: My First Workflow
+name: Day 5 Workflows
 
 on:
-  push:
   workflow_dispatch:
-    
+
 jobs:
-  hello:
+
+  job1:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Print Message
-        run: echo "Learning YAML"
+      - name: Job 1 Message
+        run: echo "This is Job 1"
 
-      - name: Show Files
-        run: ls -la
-
-      - name: Show Current Directory
-        run: pwd
-
-      - name: Show Date and Time
+      - name: Show Date
         run: date
+
+  job2:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Job 2 Message
+        run: echo "This is Job 2"
+
+      - name: Show Current User
+        run: whoami
