@@ -21,3 +21,6 @@ jobs:
 
       - name: Show Date and Time
         run: date
+        
+      - name: Print Current User
+        run: whoami
