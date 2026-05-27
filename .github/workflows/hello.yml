@@ -1,26 +1,28 @@
-name: Day 5 Workflows
+name: Day 6 Variables
 
 on:
   workflow_dispatch:
 
+env:
+  APP_NAME: MyApplication
+
 jobs:
 
-  job1:
+  build:
     runs-on: ubuntu-latest
 
-    steps:
-      - name: Job 1 Message
-        run: echo "This is Job 1"
-
-      - name: Show Date
-        run: date
-
-  job2:
-    runs-on: ubuntu-latest
+    env:
+      ENVIRONMENT: development
 
     steps:
-      - name: Job 2 Message
-        run: echo "This is Job 2"
+      - name: Print Global Variable
+        run: echo $APP_NAME
 
-      - name: Show Current User
-        run: whoami
+      - name: Print Job Variable
+        run: echo $ENVIRONMENT
+
+      - name: Step Variable Demo
+        env:
+          STEP_VAR: StepLevel
+
+        run: echo $STEP_VAR
