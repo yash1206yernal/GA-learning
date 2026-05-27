@@ -1,4 +1,4 @@
-name: Day 6 Variables
+name: Day 6 Variables & Secrets
 
 on:
   workflow_dispatch:
@@ -11,18 +11,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    env:
-      ENVIRONMENT: development
-
     steps:
-      - name: Print Global Variable
+      - name: Print App Name
         run: echo $APP_NAME
 
-      - name: Print Job Variable
-        run: echo $ENVIRONMENT
-
-      - name: Step Variable Demo
-        env:
-          STEP_VAR: StepLevel
-
-        run: echo $STEP_VAR
+      - name: Print Secret
+        run: echo ${{ secrets.MY_SECRET }}
