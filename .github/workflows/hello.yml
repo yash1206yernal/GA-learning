@@ -1,19 +1,20 @@
-name: Day 6 Variables & Secrets
+name: Day 7 First Action
 
 on:
   workflow_dispatch:
 
-env:
-  APP_NAME: MyApplication
-
 jobs:
 
-  build:
+  demo:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Print App Name
-        run: echo $APP_NAME
 
-      - name: Print Secret
-        run: echo ${{ secrets.MY_SECRET }}
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: List Repository Files
+        run: ls -la
+
+      - name: Show Current Directory
+        run: pwd
