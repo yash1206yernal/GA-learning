@@ -1,11 +1,11 @@
-name: Day 7 First Action
+name: Day 7 Setup Action
 
 on:
   workflow_dispatch:
 
 jobs:
 
-  demo:
+  node-demo:
     runs-on: ubuntu-latest
 
     steps:
@@ -13,8 +13,14 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: List Repository Files
-        run: ls -la
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
 
-      - name: Show Current Directory
-        run: pwd
+        with:
+          node-version: 20
+
+      - name: Verify Node Version
+        run: node -v
+
+      - name: Verify NPM Version
+        run: npm -v
