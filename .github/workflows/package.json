@@ -1,0 +1,9 @@
+{
+  "name": "github-actions-demo",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "echo Starting Application",
+    "test": "echo Running Tests",
+    "build": "echo Building Project"
+  }
+}

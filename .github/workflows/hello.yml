@@ -1,4 +1,4 @@
-name: Day 7 Setup Action
+name: Day 7 Node Workflow
 
 on:
   workflow_dispatch:
@@ -19,8 +19,11 @@ jobs:
         with:
           node-version: 20
 
-      - name: Verify Node Version
-        run: node -v
+      - name: Install Dependencies
+        run: npm install
 
-      - name: Verify NPM Version
-        run: npm -v
+      - name: Run Tests
+        run: npm run test
+
+      - name: Build Project
+        run: npm run build
