@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "echo Starting Application",
-    "test": "echo Running Tests",
+    "test": "exit 1",
     "build": "echo Building Project"
   }
 }
