@@ -1,26 +1,37 @@
-name: Day 8 Artifacts
+name: Day 8 Multi Job Artifacts
 
 on:
   workflow_dispatch:
 
 jobs:
-  artifact-demo:
+
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Create Build Folder
+      - name: Create Build File
         run: |
           mkdir build
-          echo "Hello from GitHub Actions" > build/output.txt
-
-      - name: Verify File
-        run: cat build/output.txt
+          echo "Artifact transferred successfully" > build/output.txt
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: build-files
           path: build/
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: build-files
+
+      - name: Show Downloaded Files
+        run: ls -R
+
+      - name: Read Artifact Content
+        run: cat output.txt
