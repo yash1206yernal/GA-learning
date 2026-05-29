@@ -1,29 +1,26 @@
-name: Day 7 Node Workflow
+name: Day 8 Artifacts
 
 on:
   workflow_dispatch:
 
 jobs:
-
-  node-demo:
+  artifact-demo:
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Create Build Folder
+        run: |
+          mkdir build
+          echo "Hello from GitHub Actions" > build/output.txt
 
+      - name: Verify File
+        run: cat build/output.txt
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
         with:
-          node-version: 20
-
-      - name: Install Dependencies
-        run: npm install
-
-      - name: Run Tests
-        run: npm run test
-
-      - name: Build Project
-        run: npm run build
+          name: build-files
+          path: build/
