@@ -1,37 +1,30 @@
-name: Day 8 Multi Job Artifacts
+name: Day 9 Matrix Build
 
 on:
   workflow_dispatch:
 
 jobs:
 
-  build:
+  test-node:
+
     runs-on: ubuntu-latest
 
-    steps:
-      - name: Create Build File
-        run: |
-          mkdir build
-          echo "Artifact transferred successfully" > build/output.txt
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-files
-          path: build/
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18, 20, 22]
 
     steps:
-      - name: Download Artifact
-        uses: actions/download-artifact@v4
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
-          name: build-files
+          node-version: ${{ matrix.node-version }}
 
-      - name: Show Downloaded Files
-        run: ls -R
+      - name: Show Node Version
+        run: node -v
 
-      - name: Read Artifact Content
-        run: cat output.txt
+      - name: Test Application
+        run: echo "Testing on Node ${{ matrix.node-version }}"
