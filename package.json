@@ -5,5 +5,8 @@
     "start": "echo Starting Application",
     "test": "echo Running Tests",
     "build": "echo Building Project"
+  },
+  "dependencies": {
+    "lodash": "^4.18.1"
   }
 }
