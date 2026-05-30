@@ -1,17 +1,22 @@
-name: Day 9 Matrix Build
+name: Day 9 Multi-Dimensional Matrix
 
 on:
   workflow_dispatch:
 
 jobs:
+  test:
 
-  test-node:
-
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
 
     strategy:
       matrix:
-        node-version: [18, 20, 22]
+        os:
+          - ubuntu-latest
+          - windows-latest
+
+        node-version:
+          - 18
+          - 20
 
     steps:
 
@@ -26,5 +31,5 @@ jobs:
       - name: Show Node Version
         run: node -v
 
-      - name: Test Application
-        run: echo "Testing on Node ${{ matrix.node-version }}"
+      - name: Show Matrix Values
+        run: echo "OS=${{ matrix.os }} Node=${{ matrix.node-version }}"
