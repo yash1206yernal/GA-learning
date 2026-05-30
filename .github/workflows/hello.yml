@@ -1,4 +1,4 @@
-name: Day 9 Multi-Dimensional Matrix
+name: Day 9 Include Exclude
 
 on:
   workflow_dispatch:
@@ -10,6 +10,7 @@ jobs:
 
     strategy:
       matrix:
+
         os:
           - ubuntu-latest
           - windows-latest
@@ -18,9 +19,17 @@ jobs:
           - 18
           - 20
 
+        exclude:
+          - os: windows-latest
+            node-version: 18
+
+        include:
+          - os: ubuntu-latest
+            node-version: 22
+
     steps:
 
-      - name: Checkout Repository
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Setup Node
@@ -28,8 +37,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Show Node Version
-        run: node -v
-
       - name: Show Matrix Values
-        run: echo "OS=${{ matrix.os }} Node=${{ matrix.node-version }}"
+        run: |
+          echo "OS=${{ matrix.os }}"
+          echo "Node=${{ matrix.node-version }}"
