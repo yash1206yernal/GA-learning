@@ -1,0 +1,19 @@
+name: Github Token Demo
+
+on:
+  workflow_dispatch:
+
+jobs:
+  demo:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print Token Exists
+        run: |
+          if [ -n "$GITHUB_TOKEN" ]; then
+            echo "Token Available"
+          else
+            echo "Token Missing"
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
