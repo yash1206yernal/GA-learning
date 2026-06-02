@@ -1,34 +1,23 @@
-name: Day 10 Cache Demo
+
+name: Day 11 Create Issue Demo
 
 on:
   workflow_dispatch:
 
+permissions:
+  issues: write
+
 jobs:
-
-  cache-demo:
-
+  demo:
     runs-on: ubuntu-latest
 
     steps:
-
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with: 
-          node-version: 20
-
-      - name: Cache npm
-        uses: actions/cache@v4
-        with:
-          path: ~/.npm
-          key: npm-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            npm-${{ runner.os }}-
-
-      - name: Install Dependencies
-        run: npm install
-
-      - name: Run Test
-        run: npm run test
+      - name: Create Issue
+        run: |
+          curl -X POST \
+          -H "Authorization: Bearer $GITHUB_TOKEN" \
+          -H "Accept: application/vnd.github+json" \
+          https://api.github.com/repos/${{ github.repository }}/issues \
+          -d '{"title":"Test Issue from GitHub Actions","body":"Created automatically"}'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
