@@ -1,0 +1,30 @@
+name: Scope Demo
+
+on:
+  workflow_dispatch:
+
+env:
+  GLOBAL_VAR: WorkflowLevel
+
+jobs:
+  demo:
+    runs-on: ubuntu-latest
+
+    env:
+      JOB_VAR: JobLevel
+
+    steps:
+      - name: Step 1
+        env:
+          STEP_VAR: StepLevel
+
+        run: |
+          echo "GLOBAL=$GLOBAL_VAR"
+          echo "JOB=$JOB_VAR"
+          echo "STEP=$STEP_VAR"
+
+      - name: Step 2
+        run: |
+          echo "GLOBAL=$GLOBAL_VAR"
+          echo "JOB=$JOB_VAR"
+          echo "STEP=$STEP_VAR"
