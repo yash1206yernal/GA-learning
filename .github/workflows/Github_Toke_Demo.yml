@@ -1,19 +1,16 @@
-name: Github Token Demo
+name: Input Demo
 
 on:
   workflow_dispatch:
+    inputs:
+      username:
+        description: "Enter your name"
+        required: true
 
 jobs:
   demo:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Print Token Exists
-        run: |
-          if [ -n "$GITHUB_TOKEN" ]; then
-            echo "Token Available"
-          else
-            echo "Token Missing"
-          fi
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Print Input
+        run: echo "Hello ${{ github.event.inputs.username }}"
