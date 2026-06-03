@@ -1,16 +1,20 @@
-name: Input Demo
+name: Choice Input Demo
 
 on:
   workflow_dispatch:
     inputs:
-      username:
-        description: "Enter your name"
+      environment:
+        description: "Select Environment"
         required: true
+        type: choice
+        options:
+          - dev
+          - staging
+          - production
 
 jobs:
   demo:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Print Input
-        run: echo "Hello ${{ github.event.inputs.username }}"
+      - run: echo "Deploying to ${{ inputs.environment }}"
