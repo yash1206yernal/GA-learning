@@ -1,21 +1,16 @@
-name: Conditional Demo
+name: Number Input Demo
 
 on:
   workflow_dispatch:
     inputs:
-      run_tests:
-        description: "Run Tests?"
+      replicas:
+        description: "Number of replicas"
         required: true
-        type: boolean
+        type: number
 
 jobs:
-  demo:     
+  demo:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Run Tests
-        if: ${{ inputs.run_tests }}
-        run: echo "Running Tests..."
-
-      - name: Deploy
-        run: echo "Deploying Application..."
+      - run: echo "Replicas = ${{ inputs.replicas }}"
