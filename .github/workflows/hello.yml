@@ -1,20 +1,16 @@
-name: Choice Input Demo
+name: Boolean Input Demo
 
 on:
   workflow_dispatch:
     inputs:
-      environment:
-        description: "Select Environment"
+      run_tests:
+        description: "Run Tests?"
         required: true
-        type: choice
-        options:
-          - dev
-          - staging
-          - production
+        type: boolean
 
 jobs:
   demo:
     runs-on: ubuntu-latest
 
     steps:
-      - run: echo "Deploying to ${{ inputs.environment }}"
+      - run: echo "Run Tests = ${{ inputs.run_tests }}"
