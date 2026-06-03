@@ -1,16 +1,48 @@
-name: Number Input Demo
+name: Deployment Pipeline
 
 on:
   workflow_dispatch:
     inputs:
+      version:
+        description: "Application Version"
+        required: true
+
+      environment:
+        description: "Target Environment"
+        required: true
+        type: choice
+        options:
+          - dev
+          - staging
+          - production
+
+      run_tests:
+        description: "Run Tests?"
+        required: true
+        type: boolean
+
       replicas:
-        description: "Number of replicas"
+        description: "Number of Replicas"
         required: true
         type: number
 
 jobs:
-  demo:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - run: echo "Replicas = ${{ inputs.replicas }}"
+      - name: Show Deployment Details
+        run: |
+          echo "Version = ${{ inputs.version }}"
+          echo "Environment = ${{ inputs.environment }}"
+          echo "Replicas = ${{ inputs.replicas }}"
+
+      - name: Run Tests
+        if: ${{ inputs.run_tests }}
+        run: echo "Running Tests..."
+
+      - name: Deploy
+        run: |
+          echo "Deploying version ${{ inputs.version }}"
+          echo "Environment: ${{ inputs.environment }}"
+          echo "Replicas: ${{ inputs.replicas }}"
