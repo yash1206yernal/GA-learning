@@ -1,4 +1,4 @@
-name: Boolean Input Demo
+name: Conditional Demo
 
 on:
   workflow_dispatch:
@@ -9,8 +9,13 @@ on:
         type: boolean
 
 jobs:
-  demo:
+  demo:     
     runs-on: ubuntu-latest
 
     steps:
-      - run: echo "Run Tests = ${{ inputs.run_tests }}"
+      - name: Run Tests
+        if: ${{ inputs.run_tests }}
+        run: echo "Running Tests..."
+
+      - name: Deploy
+        run: echo "Deploying Application..."
