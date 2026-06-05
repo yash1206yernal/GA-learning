@@ -1,4 +1,4 @@
-name: Contains Demo
+name: Status Functions Demo
 
 on:
   workflow_dispatch:
@@ -8,6 +8,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check Repository
-        if: ${{ contains(github.repository, 'GA-learning') }}
-        run: echo "Repository Match Found"
+      - name: Simulate Failure
+        run: exit 1
+
+      - name: Success Step
+        if: ${{ success() }}
+        run: echo "Everything Passed"
+
+      - name: Failure Step
+        if: ${{ failure() }}
+        run: echo "Something Failed"
+
+      - name: Always Step
+        if: ${{ always() }}
+        run: echo "Cleanup Running"
