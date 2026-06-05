@@ -1,7 +1,10 @@
-name: GitHub Context Demo
+name: Env Context Demo
 
 on:
   workflow_dispatch:
+
+env:
+  APP_NAME: GitHubActionsDemo
 
 jobs:
   demo:
@@ -9,7 +12,4 @@ jobs:
 
     steps:
       - run: |
-          echo "Repository = ${{ github.repository }}"
-          echo "Actor = ${{ github.actor }}"
-          echo "Event = ${{ github.event_name }}"
-          echo "Branch = ${{ github.ref }}"
+          echo "APP = ${{ env.APP_NAME }}"
