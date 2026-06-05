@@ -1,4 +1,4 @@
-name: Secrets Context Demo
+name: Runner Context Demo
 
 on:
   workflow_dispatch:
@@ -9,4 +9,6 @@ jobs:
 
     steps:
       - run: |
-          echo "Secret = ${{ secrets.MY_SECRET }}"
+          echo "OS = ${{ runner.os }}"
+          echo "Architecture = ${{ runner.arch }}"
+          echo "Temp = ${{ runner.temp }}"
