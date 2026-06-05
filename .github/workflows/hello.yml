@@ -1,10 +1,7 @@
-name: Env Context Demo
+name: Secrets Context Demo
 
 on:
   workflow_dispatch:
-
-env:
-  APP_NAME: GitHubActionsDemo
 
 jobs:
   demo:
@@ -12,7 +9,4 @@ jobs:
 
     steps:
       - run: |
-          echo "APP = ${{ env.APP_NAME }}"
-
-      - run: |
-          echo "Variable = ${{ vars.APP_NAME }}"      
+          echo "Secret = ${{ secrets.MY_SECRET }}"
