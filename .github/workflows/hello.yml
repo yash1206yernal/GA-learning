@@ -13,3 +13,6 @@ jobs:
     steps:
       - run: |
           echo "APP = ${{ env.APP_NAME }}"
+
+      - run: |
+          echo "Variable = ${{ vars.APP_NAME }}"      
