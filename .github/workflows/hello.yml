@@ -1,4 +1,4 @@
-name: Expression Demo
+name: StartsWith Demo
 
 on:
   workflow_dispatch:
@@ -8,9 +8,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Main Branch Check
-        if: ${{ github.ref == 'refs/heads/main' }}
-        run: echo "Running on Main Branch"
-
-      - name: Always Run
-        run: echo "Workflow Executed"
+      - name: Branch Check
+        if: ${{ startsWith(github.ref, 'refs/heads/') }}
+        run: echo "This is a branch"
