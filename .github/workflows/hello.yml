@@ -1,4 +1,4 @@
-name: Runner Context Demo
+name: Expression Demo
 
 on:
   workflow_dispatch:
@@ -8,7 +8,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - run: |
-          echo "OS = ${{ runner.os }}"
-          echo "Architecture = ${{ runner.arch }}"
-          echo "Temp = ${{ runner.temp }}"
+      - name: Main Branch Check
+        if: ${{ github.ref == 'refs/heads/main' }}
+        run: echo "Running on Main Branch"
+
+      - name: Always Run
+        run: echo "Workflow Executed"
