@@ -1,4 +1,4 @@
-name: StartsWith Demo
+name: Contains Demo
 
 on:
   workflow_dispatch:
@@ -8,6 +8,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Branch Check
-        if: ${{ startsWith(github.ref, 'refs/heads/') }}
-        run: echo "This is a branch"
+      - name: Check Repository
+        if: ${{ contains(github.repository, 'GA-learning') }}
+        run: echo "Repository Match Found"
