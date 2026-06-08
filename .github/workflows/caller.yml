@@ -7,8 +7,10 @@ jobs:
   call-workflow:
     uses: ./.github/workflows/reusable-ci.yml
 
-    with:
-      app_name: GitHubActionsDemo
+  display:
+    needs: call-workflow
+    runs-on: ubuntu-latest
 
-    secrets:
-      app_secret: inherit
+    steps:
+      - run: |
+          echo "Version = ${{ needs.call-workflow.outputs.build_version }}"

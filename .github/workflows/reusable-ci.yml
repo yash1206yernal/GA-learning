@@ -2,20 +2,18 @@ name: Reusable CI
 
 on:
   workflow_call:
-    inputs:
-      app_name:
-        required: true
-        type: string
-
-    secrets:
-      app_secret:
-        required: true
+    outputs:
+      build_version:
+        description: "Version generated"
+        value: ${{ jobs.test.outputs.version }}
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+
     steps:
-      - run: |
-          echo "Application = ${{ inputs.app_name }}"
-          echo "Secret = ${{ secrets.app_secret }}"
+      - id: version
+        run: echo "version=1.0.0" >> $GITHUB_OUTPUT
