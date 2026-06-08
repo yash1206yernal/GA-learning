@@ -11,4 +11,4 @@ jobs:
       app_name: GitHubActionsDemo
 
     secrets:
-      app_secret: ${{ secrets.MY_SECRET }}
+      app_secret: inherit
