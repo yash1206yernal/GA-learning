@@ -7,9 +7,15 @@ on:
         required: true
         type: string
 
+    secrets:
+      app_secret:
+        required: true
+
 jobs:
   test:
     runs-on: ubuntu-latest
 
     steps:
-      - run: echo "Application = ${{ inputs.app_name }}"
+      - run: |
+          echo "Application = ${{ inputs.app_name }}"
+          echo "Secret = ${{ secrets.app_secret }}"
