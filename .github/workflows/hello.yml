@@ -1,24 +1,18 @@
-name: Status Functions Demo
+name: Upload Artifact Demo
 
 on:
   workflow_dispatch:
 
 jobs:
-  demo:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Simulate Failure
-        run: exit 1
+      - name: Create File
+        run: echo "Hello Artifact" > app.txt
 
-      - name: Success Step
-        if: ${{ success() }}
-        run: echo "Everything Passed"
-
-      - name: Failure Step
-        if: ${{ failure() }}
-        run: echo "Something Failed"
-
-      - name: Always Step
-        if: ${{ always() }}
-        run: echo "Cleanup Running"
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-file
+          path: app.txt
