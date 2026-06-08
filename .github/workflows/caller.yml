@@ -1,4 +1,3 @@
-
 name: Caller Workflow
 
 on:
@@ -7,3 +6,6 @@ on:
 jobs:
   call-workflow:
     uses: ./.github/workflows/reusable-ci.yml
+
+    with:
+      app_name: GitHubActionsDemo

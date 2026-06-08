@@ -2,10 +2,14 @@ name: Reusable CI
 
 on:
   workflow_call:
+    inputs:
+      app_name:
+        required: true
+        type: string
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
     steps:
-      - run: echo "Running Shared CI Pipeline"
+      - run: echo "Application = ${{ inputs.app_name }}"
