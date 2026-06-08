@@ -1,0 +1,11 @@
+name: Reusable CI
+
+on:
+  workflow_call:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: echo "Running Shared CI Pipeline"
