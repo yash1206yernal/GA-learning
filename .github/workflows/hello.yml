@@ -1,35 +1,16 @@
-name: Build And Deploy
+name: Matrix Demo
 
 on:
   workflow_dispatch:
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
-    steps:
-      - name: Create Package
-        run: |
-          mkdir package
-          echo "Application Version 1.0" > package/app.txt
-
-      - name: Upload Package
-        uses: actions/upload-artifact@v4
-        with:
-          name: deployment-package
-          path: package/
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: [1, 2, 3]
 
     steps:
-      - name: Download Package
-        uses: actions/download-artifact@v4
-        with:
-          name: deployment-package
-
-      - name: Verify Package
-        run: |
-          ls -R
-          cat app.txt
+      - name: Print Version
+        run: echo "Version = ${{ matrix.version }}"
