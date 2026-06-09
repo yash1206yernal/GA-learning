@@ -1,18 +1,19 @@
-name: Multi Matrix Demo
+name: Node Matrix Demo
 
 on:
   workflow_dispatch:
 
 jobs:
   test:
+    runs-on: ubuntu-latest
+
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest]
-        node: [18, 20]
-
-    runs-on: ${{ matrix.os }}
+        node-version: [18,20,22]
 
     steps:
-      - run: |
-          echo "OS=${{ matrix.os }}"
-          echo "Node=${{ matrix.node }}"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - run: node --version
