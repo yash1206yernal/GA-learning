@@ -1,4 +1,4 @@
-name: Node Matrix Demo
+name: Fail Fast Demo
 
 on:
   workflow_dispatch:
@@ -8,12 +8,15 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
+      fail-fast: true
+
       matrix:
-        node-version: [18,20,22]
+        version: [1,2,3]
 
     steps:
-      - uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
+      - name: Print Version
+        run: echo "Version=${{ matrix.version }}"
 
-      - run: node --version
+      - name: Fail Version 2
+        if: ${{ matrix.version == 2 }}
+        run: exit 1
