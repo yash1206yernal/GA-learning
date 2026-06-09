@@ -1,4 +1,4 @@
-name: Include Demo
+name: Enterprise Matrix Demo
 
 on:
   workflow_dispatch:
@@ -6,17 +6,24 @@ on:
 jobs:
   test:
     strategy:
-      matrix:
-        os: [ubuntu-latest]
-        node: [18,20]
+      fail-fast: false
 
-        include:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node: [18,20,22]
+
+        exclude:
           - os: windows-latest
             node: 22
 
     runs-on: ${{ matrix.os }}
 
     steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+
       - run: |
           echo "OS=${{ matrix.os }}"
           echo "Node=${{ matrix.node }}"
+          node --version
