@@ -1,4 +1,4 @@
-name: Artifact Sharing Demo
+name: Multiple Artifacts Demo
 
 on:
   workflow_dispatch:
@@ -8,24 +8,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Create File
-        run: echo "Hello From Build Job" > app.txt
+      - run: echo "Application" > app.txt
+      - run: echo "Log File" > log.txt
 
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4
         with:
-          name: app-file
+          name: app-artifact
           path: app.txt
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Download Artifact
-        uses: actions/download-artifact@v4
+      - uses: actions/upload-artifact@v4
         with:
-          name: app-file
-
-      - name: Read File
-        run: cat app.txt
+          name: log-artifact
+          path: log.txt
