@@ -1,22 +1,22 @@
-name: Fail Fast Demo
+name: Exclude Demo
 
 on:
   workflow_dispatch:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
-
     strategy:
-      fail-fast: false
-
       matrix:
-        version: [1,2,3]
+        os: [ubuntu-latest, windows-latest]
+        node: [18,22]
+
+        exclude:
+          - os: windows-latest
+            node: 22
+
+    runs-on: ${{ matrix.os }}
 
     steps:
-      - name: Print Version
-        run: echo "Version=${{ matrix.version }}"
-
-      - name: Fail Version 2
-        if: ${{ matrix.version == 2 }}
-        run: exit 1
+      - run: |
+          echo "OS=${{ matrix.os }}"
+          echo "Node=${{ matrix.node }}"
