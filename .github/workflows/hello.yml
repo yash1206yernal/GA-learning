@@ -1,16 +1,18 @@
-name: Matrix Demo
+name: Multi Matrix Demo
 
 on:
   workflow_dispatch:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
-
     strategy:
       matrix:
-        version: [1, 2, 3]
+        os: [ubuntu-latest, windows-latest]
+        node: [18, 20]
+
+    runs-on: ${{ matrix.os }}
 
     steps:
-      - name: Print Version
-        run: echo "Version = ${{ matrix.version }}"
+      - run: |
+          echo "OS=${{ matrix.os }}"
+          echo "Node=${{ matrix.node }}"
