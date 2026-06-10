@@ -1,29 +1,16 @@
-name: Enterprise Matrix Demo
+name: Redis Service Demo
 
 on:
   workflow_dispatch:
 
 jobs:
   test:
-    strategy:
-      fail-fast: false
+    runs-on: ubuntu-latest
 
-      matrix:
-        os: [ubuntu-latest, windows-latest]
-        node: [18,20,22]
-
-        exclude:
-          - os: windows-latest
-            node: 22
-
-    runs-on: ${{ matrix.os }}
+    services:
+      redis:
+        image: redis
 
     steps:
-      - uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node }}
-
-      - run: |
-          echo "OS=${{ matrix.os }}"
-          echo "Node=${{ matrix.node }}"
-          node --version
+      - name: Verify Redis Container
+        run: docker ps
