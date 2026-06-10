@@ -1,4 +1,4 @@
-name: Container Job Demo
+name: App + Postgres Demo
 
 on:
   workflow_dispatch:
@@ -10,9 +10,24 @@ jobs:
     container:
       image: node:20
 
-    steps:
-      - name: Show Node Version
-        run: node --version
+    services:
+      postgres:
+        image: postgres
 
-      - name: Show OS
-        run: cat /etc/os-release
+        env:
+          POSTGRES_PASSWORD: mypassword
+          POSTGRES_DB: mydb
+
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - run: |
+          echo "Node Version"
+          node --version
+
+      - run: |
+          echo "Postgres Service Running"
