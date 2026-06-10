@@ -1,4 +1,4 @@
-name: Redis Service Demo
+name: PostgreSQL Demo
 
 on:
   workflow_dispatch:
@@ -8,9 +8,16 @@ jobs:
     runs-on: ubuntu-latest
 
     services:
-      redis:
-        image: redis
+      postgres:
+        image: postgres
+
+        env:
+          POSTGRES_PASSWORD: mypassword
+          POSTGRES_DB: mydb
+
+        ports:
+          - 5432:5432
 
     steps:
-      - name: Verify Redis Container
+      - name: Show Running Containers
         run: docker ps
