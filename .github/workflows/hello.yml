@@ -13,6 +13,7 @@ jobs:
       - name: Build Docker Image
         run: |
           docker build -t demo-app:v1 .
+          docker tag demo-app:v1 demo-app:latest
 
       - name: Show Images
         run: docker images
