@@ -16,11 +16,11 @@ jobs:
       - name: Run Container
         run: docker run -d --name myapp demo-app:v1
 
-      - name: Show Containers
+      - name: Show Running Containers
         run: docker ps
 
-      - name: Container Logs
-        run: docker logs myapp
+      - name: Show All Containers
+        run: docker ps -a
 
       - name: Execute Command
         run: docker exec myapp ls -la
@@ -29,4 +29,4 @@ jobs:
         run: docker stop myapp
 
       - name: Remove Container
-        run: docker rm myapp  
+        run: docker rm myapp

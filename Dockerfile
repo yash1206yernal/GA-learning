@@ -4,4 +4,4 @@ WORKDIR /app
 
 COPY . .
 
-CMD ["node", "--version"]
+CMD ["sleep","infinity"]
