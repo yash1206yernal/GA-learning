@@ -18,3 +18,15 @@ jobs:
 
       - name: Show Containers
         run: docker ps
+
+      - name: Container Logs
+        run: docker logs myapp
+
+      - name: Execute Command
+        run: docker exec myapp ls -la
+
+      - name: Stop Container
+        run: docker stop myapp
+
+      - name: Remove Container
+        run: docker rm myapp  
