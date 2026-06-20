@@ -24,3 +24,6 @@ jobs:
 
       - name: Stop Everything
         run: docker compose down
+
+      - name: Ping Redis
+        run: docker exec myapp ping -c 4 myredis
