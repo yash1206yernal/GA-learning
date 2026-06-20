@@ -19,8 +19,8 @@ jobs:
       - name: Show Running Containers
         run: docker compose ps
 
-      - name: Ping Redis
-        run: docker exec myapp ping -c 4 myredis
+      - name: DNS Resolution
+        run: docker exec myapp getent hosts myredis
 
       - name: Show Redis Logs
         run: docker compose logs redis
