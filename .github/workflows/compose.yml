@@ -1,0 +1,26 @@
+name: Docker Compose
+
+on:
+  workflow_dispatch:
+
+jobs:
+
+  compose:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v4
+
+      - name: Start Services
+        run: docker compose up -d
+
+      - name: Show Running Containers
+        run: docker compose ps
+
+      - name: Show Redis Logs
+        run: docker compose logs redis
+
+      - name: Stop Everything
+        run: docker compose down

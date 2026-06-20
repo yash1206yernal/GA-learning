@@ -1,0 +1,10 @@
+services:
+
+  app:
+    image: node:20
+    container_name: myapp
+    command: sleep infinity
+
+  redis:
+    image: redis
+    container_name: myredis
