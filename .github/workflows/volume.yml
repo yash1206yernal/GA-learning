@@ -1,0 +1,43 @@
+name: Docker Volume Demo
+
+on:
+  workflow_dispatch:
+
+jobs:
+  volume:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Create Volume
+        run: docker volume create mydata
+
+      - name: Show Volumes
+        run: docker volume ls
+
+      - name: Run Container
+        run: |
+          docker run -d \
+          --name mycontainer \
+          -v mydata:/app/data \
+          node:20 sleep infinity
+
+      - name: Create File
+        run: |
+          docker exec mycontainer sh -c \
+          "echo Hello-Yash > /app/data/test.txt"
+
+      - name: Read File
+        run: docker exec mycontainer cat /app/data/test.txt
+
+      - name: Remove Container
+        run: docker rm -f mycontainer
+
+      - name: Recreate Container
+        run: |
+          docker run -d \
+          --name mycontainer2 \
+          -v mydata:/app/data \
+          node:20 sleep infinity
+
+      - name: Verify Persistence
+        run: docker exec mycontainer2 cat /app/data/test.txt
