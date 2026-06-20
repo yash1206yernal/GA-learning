@@ -11,6 +11,9 @@ jobs:
       - name: Create Volume
         run: docker volume create mydata
 
+      - name: Show Volume Details
+        run: docker volume inspect mydata
+
       - name: Show Volumes
         run: docker volume ls
 
