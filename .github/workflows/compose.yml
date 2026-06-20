@@ -19,11 +19,13 @@ jobs:
       - name: Show Running Containers
         run: docker compose ps
 
+      - name: Ping Redis
+        run: docker exec myapp ping -c 4 myredis
+
       - name: Show Redis Logs
         run: docker compose logs redis
 
       - name: Stop Everything
         run: docker compose down
 
-      - name: Ping Redis
-        run: docker exec myapp ping -c 4 myredis
+      
