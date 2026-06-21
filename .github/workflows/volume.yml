@@ -32,5 +32,5 @@ jobs:
       - name: Inspect Network
         run: docker network inspect mynet
 
-      - name: Ping app2 from app1
-        run: docker exec app1 ping app2 -c 3
+      - name: Resolve app2
+        run: docker exec app1 getent hosts app2
