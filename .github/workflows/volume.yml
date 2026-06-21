@@ -1,46 +1,28 @@
-name: Docker Volume Demo
+name: Bind Mount
 
 on:
   workflow_dispatch:
 
 jobs:
-  volume:
+  bind:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Create Volume
-        run: docker volume create mydata
 
-      - name: Show Volume Details
-        run: docker volume inspect mydata
-
-      - name: Show Volumes
-        run: docker volume ls
+      - name: Create Host Directory
+        run: mkdir myfolder
 
       - name: Run Container
         run: |
           docker run -d \
-          --name mycontainer \
-          -v mydata:/app/data \
-          node:20 sleep infinity
+          --name myapp \
+          -v $(pwd)/myfolder:/data \
+          node:20 sleep 300
 
-      - name: Create File
+      - name: Write File
         run: |
-          docker exec mycontainer sh -c \
-          "echo Hello-Yash > /app/data/test.txt"
+          docker exec myapp sh -c \
+          "echo Hello-Yash > /data/test.txt"
 
-      - name: Read File
-        run: docker exec mycontainer cat /app/data/test.txt
-
-      - name: Remove Container
-        run: docker rm -f mycontainer
-
-      - name: Recreate Container
-        run: |
-          docker run -d \
-          --name mycontainer2 \
-          -v mydata:/app/data \
-          node:20 sleep infinity
-
-      - name: Verify Persistence
-        run: docker exec mycontainer2 cat /app/data/test.txt
+      - name: Check Host Files
+        run: cat myfolder/test.txt
