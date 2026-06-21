@@ -1,28 +1,36 @@
-name: Bind Mount
+name: Docker Network
 
 on:
   workflow_dispatch:
 
 jobs:
-  bind:
+  network:
     runs-on: ubuntu-latest
 
     steps:
 
-      - name: Create Host Directory
-        run: mkdir myfolder
+      - name: Create Network
+        run: docker network create mynet
 
-      - name: Run Container
+      - name: Run Container 1
         run: |
-          docker run -d \
-          --name myapp \
-          -v $(pwd)/myfolder:/data \
-          node:20 sleep 300
+          docker run -dit \
+          --name app1 \
+          --network mynet \
+          node:20
 
-      - name: Write File
+      - name: Run Container 2
         run: |
-          docker exec myapp sh -c \
-          "echo Hello-Yash > /data/test.txt"
+          docker run -dit \
+          --name app2 \
+          --network mynet \
+          node:20
 
-      - name: Check Host Files
-        run: cat myfolder/test.txt
+      - name: Show Networks
+        run: docker network ls
+
+      - name: Inspect Network
+        run: docker network inspect mynet
+
+      - name: Ping app2 from app1
+        run: docker exec app1 ping app2 -c 3
