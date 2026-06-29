@@ -1,32 +1,20 @@
-name: Run Container
+name: Self Hosted Demo
 
 on:
   workflow_dispatch:
 
 jobs:
-  docker:
-    runs-on: ubuntu-latest
+  demo:
+    runs-on: self-hosted
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build Image
-        run: docker build -t demo-app:v1 .
+      - name: Show Computer Name
+        run: hostname
 
-      - name: Run Container
-        run: docker run -d --name myapp demo-app:v1
+      - name: Show Current User
+        run: whoami
 
-      - name: Show Running Containers
-        run: docker ps
-
-      - name: Show All Containers
-        run: docker ps -a
-
-      - name: Execute Command
-        run: docker exec myapp ls -la
-
-      - name: Stop Container
-        run: docker stop myapp
-
-      - name: Remove Container
-        run: docker rm myapp
+      - name: Show Current Directory
+        run: pwd

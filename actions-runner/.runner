@@ -1,0 +1,11 @@
+﻿{
+  "agentId": 21,
+  "agentName": "LAPTOP-JI9C2JJK",
+  "poolId": 1,
+  "poolName": "Default",
+  "serverUrl": "https://pipelinesghubeus2.actions.githubusercontent.com/XTCVYAR8BXi52LGyn91UmlYP991p84VhaN3pOa7HQTO6m8RbZs/",
+  "gitHubUrl": "https://github.com/yash1206yernal/GA-learning",
+  "workFolder": "_work",
+  "useV2Flow": true,
+  "serverUrlV2": "https://broker.actions.githubusercontent.com/"
+}
