@@ -1,4 +1,4 @@
-name: Contains Demo
+name: StartsWith Demo
 
 on:
   workflow_dispatch:
@@ -8,6 +8,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Contains Demo
-        if: contains(github.ref, 'main')
-        run: echo "The branch name contains 'main'"
+      - name: StartsWith Demo
+        if: startsWith(github.ref, 'refs/heads/')
+        run: echo "This workflow is running from a branch"
