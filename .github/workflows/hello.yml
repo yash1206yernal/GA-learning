@@ -1,4 +1,4 @@
-name: Status Demo
+name: AND Demo
 
 on:
   workflow_dispatch:
@@ -8,20 +8,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Step 1
-        run: echo "Hello"
-
-      - name: Force Failure
-        run: exit 1
-
-      - name: Runs on Success
-        if: success()
-        run: echo "Success"
-
-      - name: Runs on Failure
-        if: failure()
-        run: echo "Failure detected"
-
-      - name: Always Runs
-        if: always()
-        run: echo "Cleanup completed"
+      - name: AND Condition
+        if: github.ref == 'refs/heads/main' && github.actor == 'yash1206yernal'
+        run: echo "Both conditions are true!"
