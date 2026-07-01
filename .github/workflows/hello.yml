@@ -1,13 +1,13 @@
-name: AND Demo
+name: OR Demo
 
 on:
   workflow_dispatch:
 
 jobs:
-  demo:
+ demo:
     runs-on: ubuntu-latest
 
     steps:
-      - name: AND Condition
-        if: github.ref == 'refs/heads/main' && github.actor == 'yash1206yernal'
-        run: echo "Both conditions are true!"
+      - name: OR Condition
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev'
+        run: echo "Main or Dev branch"
