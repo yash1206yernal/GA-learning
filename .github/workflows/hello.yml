@@ -1,4 +1,4 @@
-name: If Demo
+name: Status Demo
 
 on:
   workflow_dispatch:
@@ -8,13 +8,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Step 1
+        run: echo "Hello"
+
+      - name: Force Failure
+        run: exit 1
+
+      - name: Runs on Success
+        if: success()
+        run: echo "Success"
+
+      - name: Runs on Failure
+        if: failure()
+        run: echo "Failure detected"
+
       - name: Always Runs
-        run: echo "Step 1"
-
-      - name: Conditional Step
-        if: true
-        run: echo "This ran because condition is true"
-
-      - name: Never Runs
-        if: false
-        run: echo "You should never see this"
+        if: always()
+        run: echo "Cleanup completed"
