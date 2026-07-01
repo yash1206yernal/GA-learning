@@ -1,13 +1,13 @@
-name: OR Demo
+name: NOT Demo
 
 on:
   workflow_dispatch:
 
 jobs:
- demo:
+  demo:
     runs-on: ubuntu-latest
 
     steps:
-      - name: OR Condition
-        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev'
-        run: echo "Main or Dev branch"
+      - name: NOT Condition
+        if: ${{ github.ref != 'refs/heads/dev' }}
+        run: echo "This is NOT the dev branch"
