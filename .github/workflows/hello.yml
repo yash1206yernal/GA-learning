@@ -1,20 +1,20 @@
-name: Self Hosted Demo
+name: If Demo
 
 on:
   workflow_dispatch:
 
 jobs:
   demo:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Always Runs
+        run: echo "Step 1"
 
-      - name: Show Computer Name
-        run: hostname
+      - name: Conditional Step
+        if: true
+        run: echo "This ran because condition is true"
 
-      - name: Show Current User
-        run: whoami
-
-      - name: Show Current Directory
-        run: pwd
+      - name: Never Runs
+        if: false
+        run: echo "You should never see this"
