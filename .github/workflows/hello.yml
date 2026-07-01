@@ -1,4 +1,4 @@
-name: StartsWith Demo
+name: EndsWith Demo
 
 on:
   workflow_dispatch:
@@ -8,6 +8,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: StartsWith Demo
-        if: startsWith(github.ref, 'refs/heads/')
-        run: echo "This workflow is running from a branch"
+      - name: EndsWith Demo
+        if: endsWith(github.ref, 'main')
+        run: echo "The branch ends with 'main'"
