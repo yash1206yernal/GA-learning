@@ -1,4 +1,4 @@
-name: Expression Demo
+name: GitHub Context
 
 on:
   workflow_dispatch:
@@ -8,22 +8,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Main Branch Check
-        if: github.ref == 'refs/heads/main'
-        run: echo "Running on main"
+      - name: Repository
+        run: echo "${{ github.repository }}"
 
-      - name: Starts With
-        if: startsWith(github.ref, 'refs/heads/')
-        run: echo "This is a branch"
+      - name: Actor
+        run: echo "${{ github.actor }}"
 
-      - name: Ends With
-        if: endsWith(github.ref, 'main')
-        run: echo "Branch ends with main"
+      - name: Branch
+        run: echo "${{ github.ref }}"
 
-      - name: Contains
-        if: contains(github.ref, 'main')
-        run: echo "Branch contains main"
-
-      - name: Combined Condition
-        if: github.ref == 'refs/heads/main' && contains(github.ref, 'main')
-        run: echo "Production deployment condition satisfied"
+      - name: Workflow
+        run: echo "${{ github.workflow }}"
