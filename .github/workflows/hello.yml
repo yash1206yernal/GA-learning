@@ -1,4 +1,4 @@
-name: Comment on Issue
+name: Auto Issue on Failure
 
 on:
   workflow_dispatch:
@@ -11,12 +11,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Add Comment
+      - name: Step 1
+        run: echo "Starting workflow"
+
+      - name: Force Failure
+        run: exit 1
+
+      - name: Create Issue
+        if: failure()
         run: |
           curl -X POST \
             -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
             -H "Accept: application/vnd.github+json" \
-            https://api.github.com/repos/${{ github.repository }}/issues/4/comments \
+            https://api.github.com/repos/${{ github.repository }}/issues \
             -d '{
-              "body":"This comment was added automatically by GitHub Actions 🚀"
+              "title":"Workflow Failed",
+              "body":"A GitHub Actions workflow failed and automatically created this issue."
             }'
