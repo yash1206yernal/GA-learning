@@ -1,4 +1,4 @@
-name: GitHub Context
+name: Repository API
 
 on:
   workflow_dispatch:
@@ -8,14 +8,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Repository
-        run: echo "${{ github.repository }}"
-
-      - name: Actor
-        run: echo "${{ github.actor }}"
-
-      - name: Branch
-        run: echo "${{ github.ref }}"
-
-      - name: Workflow
-        run: echo "${{ github.workflow }}"
+      - name: Get Repository Information
+        run: |
+          curl \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/${{ github.repository }}
