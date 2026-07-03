@@ -1,0 +1,15 @@
+name: Hello Action
+
+description: My first composite GitHub Action
+
+runs:
+  using: composite
+
+  steps:
+    - name: Say Hello
+      shell: bash
+      run: echo "Hello from my custom action!"
+
+    - name: Print Date
+      shell: bash
+      run: date
