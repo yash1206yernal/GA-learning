@@ -13,3 +13,5 @@ jobs:
 
       - name: Run My Custom Action
         uses: ./.github/actions/hello-action
+        with:
+         username: Yash

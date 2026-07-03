@@ -2,13 +2,18 @@ name: Hello Action
 
 description: My first composite GitHub Action
 
+inputs:
+  username:
+    description: Name of the user
+    required: true
+
 runs:
   using: composite
 
   steps:
-    - name: Say Hello
+    - name: Greet User
       shell: bash
-      run: echo "Hello from my custom action!"
+      run: echo "Hello ${{ inputs.username }}!"
 
     - name: Print Date
       shell: bash
