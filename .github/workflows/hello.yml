@@ -8,10 +8,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Run My Custom Action
+        id: hello
         uses: ./.github/actions/hello-action
         with:
-         username: Yash
+          username: Yash
+
+      - name: Print Action Output
+        run: echo "${{ steps.hello.outputs.greeting }}"

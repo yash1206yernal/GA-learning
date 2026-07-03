@@ -7,13 +7,20 @@ inputs:
     description: Name of the user
     required: true
 
+outputs:
+  greeting:
+    description: Greeting message
+    value: ${{ steps.greet.outputs.message }}
+
 runs:
   using: composite
 
   steps:
     - name: Greet User
+      id: greet
       shell: bash
-      run: echo "Hello ${{ inputs.username }}!"
+      run: |
+        echo "message=Hello ${{ inputs.username }}!" >> $GITHUB_OUTPUT
 
     - name: Print Date
       shell: bash
