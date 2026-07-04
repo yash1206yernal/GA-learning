@@ -1,10 +1,14 @@
-name: Hello Action
+name: Greeting Action
 
-description: My first composite GitHub Action
+description: Reusable greeting action
 
 inputs:
   username:
-    description: Name of the user
+    description: User's name
+    required: true
+
+  company:
+    description: Company name
     required: true
 
 outputs:
@@ -16,12 +20,12 @@ runs:
   using: composite
 
   steps:
-    - name: Greet User
-      id: greet
+    - id: greet
       shell: bash
       run: |
-        echo "message=Hello ${{ inputs.username }}!" >> $GITHUB_OUTPUT
+        MESSAGE="Hello ${{ inputs.username }}, welcome to ${{ inputs.company }}!"
+        echo "$MESSAGE"
+        echo "message=$MESSAGE" >> $GITHUB_OUTPUT
 
-    - name: Print Date
-      shell: bash
+    - shell: bash
       run: date

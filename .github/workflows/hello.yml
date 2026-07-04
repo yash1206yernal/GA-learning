@@ -10,11 +10,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Run My Custom Action
-        id: hello
+      - name: Run Greeting Action
+        id: greet
         uses: ./.github/actions/hello-action
         with:
           username: Yash
+          company: OpenAI
 
-      - name: Print Action Output
-        run: echo "${{ steps.hello.outputs.greeting }}"
+      - name: Display Output
+        run: |
+          echo "Returned message:"
+          echo "${{ steps.greet.outputs.greeting }}"
