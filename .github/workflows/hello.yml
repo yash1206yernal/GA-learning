@@ -1,25 +1,33 @@
-name: Upload Artifact Demo
+name: Download Artifact Demo
 
 on:
   workflow_dispatch:
 
 jobs:
-  demo:
+  create:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-
       - name: Create Report
         run: |
-          echo "GitHub Actions Report" > report.txt
-          echo "Created on $(date)" >> report.txt
+          echo "Artifact created successfully!" > report.txt
+          echo "Generated on $(date)" >> report.txt
+
+      - name: Upload Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: report
+          path: report.txt
+
+  consume:
+    needs: create
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download Report
+        uses: actions/download-artifact@v4
+        with:
+          name: report
 
       - name: Display Report
         run: cat report.txt
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: workflow-report
-          path: report.txt
