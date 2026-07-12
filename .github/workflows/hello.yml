@@ -1,4 +1,4 @@
-name: Composite Action Demo
+name: Setup Node Demo
 
 on:
   workflow_dispatch:
@@ -10,14 +10,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Run Greeting Action
-        id: greet
-        uses: ./.github/actions/hello-action
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          username: Yash
-          company: OpenAI
+          node-version: 22
 
-      - name: Display Output
+      - name: Check Node Version
         run: |
-          echo "Returned message:"
-          echo "${{ steps.greet.outputs.greeting }}"
+          node -v
+          npm -v
