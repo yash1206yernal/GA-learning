@@ -1,4 +1,4 @@
-name: Secret Demo
+name: Secret Environment Demo
 
 on:
   workflow_dispatch:
@@ -8,5 +8,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Print Secret
-        run: echo "${{ secrets.MY_SECRET }}"
+      - name: Use Secret as Environment Variable
+        env:
+          PASSWORD: ${{ secrets.MY_SECRET }}
+
+        run: |
+          echo "Password is: $PASSWORD"
