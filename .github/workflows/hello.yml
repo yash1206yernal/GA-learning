@@ -1,33 +1,12 @@
-name: Download Artifact Demo
+name: Secret Demo
 
 on:
   workflow_dispatch:
 
 jobs:
-  create:
+  demo:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Create Report
-        run: |
-          echo "Artifact created successfully!" > report.txt
-          echo "Generated on $(date)" >> report.txt
-
-      - name: Upload Report
-        uses: actions/upload-artifact@v4
-        with:
-          name: report
-          path: report.txt
-
-  consume:
-    needs: create
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Download Report
-        uses: actions/download-artifact@v4
-        with:
-          name: report
-
-      - name: Display Report
-        run: cat report.txt
+      - name: Print Secret
+        run: echo "${{ secrets.MY_SECRET }}"
