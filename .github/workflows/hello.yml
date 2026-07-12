@@ -1,4 +1,4 @@
-name: Setup Node Demo
+name: Cache Demo
 
 on:
   workflow_dispatch:
@@ -10,12 +10,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 22
 
-      - name: Check Node Version
-        run: |
-          node -v
-          npm -v
+      - name: Cache npm
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: npm-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Verify
+        run: echo "Dependencies installed!"
