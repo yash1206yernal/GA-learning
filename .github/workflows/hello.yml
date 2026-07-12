@@ -1,18 +1,14 @@
-name: Least Privilege Demo
+name: Environment Secret Demo
 
 on:
   workflow_dispatch:
 
-permissions:
-  contents: read
-
 jobs:
-  demo:
+  deploy:
     runs-on: ubuntu-latest
 
+    environment: Production
+
     steps:
-      - name: Explain Permissions
-        run: |
-          echo "Following the Principle of Least Privilege"
-          echo "This workflow only needs read access."
-          echo "No write permissions have been granted."
+      - name: Display Environment Secret
+        run: echo "${{ secrets.DB_PASSWORD }}"
