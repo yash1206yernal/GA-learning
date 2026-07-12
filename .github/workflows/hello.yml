@@ -1,31 +1,21 @@
-name: GitHub Token Demo
+name: Permissions Demo
 
 on:
   workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
 
 jobs:
   demo:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Show GitHub Actor
-        run: 'echo "Actor: ${{ github.actor }}"'
-
-      - name: Show Repository
-        run: 'echo "Repository: ${{ github.repository }}"'
-
-      - name: Check Token Availability
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Show Permissions Demo
         run: |
-          if [ -n "$GH_TOKEN" ]; then
-            echo "GITHUB_TOKEN is available."
-          else
-            echo "GITHUB_TOKEN is missing."
-          fi
-
-      - name: Show Token Length
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          echo "Token length: ${#GH_TOKEN}"
+          echo "Repository: ${{ github.repository }}"
+          echo "Actor: ${{ github.actor }}"
+          echo "This workflow has:"
+          echo "- Read access to repository contents"
+          echo "- Write access to issues"
