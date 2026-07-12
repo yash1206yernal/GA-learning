@@ -1,21 +1,18 @@
-name: Permissions Demo
+name: Least Privilege Demo
 
 on:
   workflow_dispatch:
 
 permissions:
   contents: read
-  issues: write
 
 jobs:
   demo:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Show Permissions Demo
+      - name: Explain Permissions
         run: |
-          echo "Repository: ${{ github.repository }}"
-          echo "Actor: ${{ github.actor }}"
-          echo "This workflow has:"
-          echo "- Read access to repository contents"
-          echo "- Write access to issues"
+          echo "Following the Principle of Least Privilege"
+          echo "This workflow only needs read access."
+          echo "No write permissions have been granted."
