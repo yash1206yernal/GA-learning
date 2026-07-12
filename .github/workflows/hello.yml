@@ -1,4 +1,4 @@
-name: Secret Environment Demo
+name: GitHub Token Demo
 
 on:
   workflow_dispatch:
@@ -8,9 +8,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Use Secret as Environment Variable
-        env:
-          PASSWORD: ${{ secrets.MY_SECRET }}
+      - name: Show GitHub Actor
+        run: 'echo "Actor: ${{ github.actor }}"'
 
+      - name: Show Repository
+        run: 'echo "Repository: ${{ github.repository }}"'
+
+      - name: Check Token Availability
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo "Password is: $PASSWORD"
+          if [ -n "$GH_TOKEN" ]; then
+            echo "GITHUB_TOKEN is available."
+          else
+            echo "GITHUB_TOKEN is missing."
+          fi
+
+      - name: Show Token Length
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Token length: ${#GH_TOKEN}"
