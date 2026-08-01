@@ -1,4 +1,3 @@
-
 name: Caller Workflow
 
 on:
@@ -6,12 +5,4 @@ on:
 
 jobs:
   call-workflow:
-    uses: ./.github/workflows/reusable-ci.yml
-
-  display:
-    needs: call-workflow
-    runs-on: ubuntu-latest
-
-    steps:
-      - run: |
-          echo "Version = ${{ needs.call-workflow.outputs.build_version }}"
+    uses: ./.github/workflows/hello.yml
