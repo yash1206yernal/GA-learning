@@ -9,3 +9,6 @@ jobs:
 
     with:
       username: "Yash"
+
+    secrets:
+      my_secret: ${{ secrets.MY_SECRET }}
