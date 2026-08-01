@@ -6,3 +6,6 @@ on:
 jobs:
   call-workflow:
     uses: ./.github/workflows/hello.yml
+
+    with:
+      username: "Yash"
