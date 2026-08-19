@@ -7,10 +7,16 @@ on:
         required: true
         type: string
 
+    secrets:
+      my_secret:
+        required: true
+
 jobs:
   hello:
     runs-on: ubuntu-latest
 
     steps:
       - name: Greeting
-        run: echo "Hello ${{ inputs.username }}!"
+        run: |
+          echo "Hello ${{ inputs.username }}!"
+          echo "Secret is: ${{ secrets.my_secret }}"
