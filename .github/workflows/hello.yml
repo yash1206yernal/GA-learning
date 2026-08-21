@@ -1,26 +1,27 @@
-name: Matrix Exclude Demo
+name: Matrix Fail Fast Demo
 
 on:
   workflow_dispatch:
 
 jobs:
   test:
-    strategy:
-      matrix:
-        node: [20, 22, 24]
-        environment: [development, production]
-
-        exclude:
-          - node: 20
-            environment: production
-
-          - node: 24
-            environment: development
-
     runs-on: ubuntu-latest
 
+    strategy:
+      fail-fast: true
+      matrix:
+        version: [1, 2, 3]
+
     steps:
-      - name: Show Matrix Values
+      - name: Show Version
         run: |
-          echo "Node version: ${{ matrix.node }}"
-          echo "Environment: ${{ matrix.environment }}"
+          echo "Running version ${{ matrix.version }}"
+
+      - name: Test
+        run: |
+          if [ "${{ matrix.version }}" = "2" ]; then
+            echo "Version 2 failed!"
+            exit 1
+          fi
+
+          echo "Version ${{ matrix.version }} passed!"
