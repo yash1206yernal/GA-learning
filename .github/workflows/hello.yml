@@ -1,4 +1,4 @@
-name: OS Matrix Demo
+name: Matrix Include Demo
 
 on:
   workflow_dispatch:
@@ -7,13 +7,18 @@ jobs:
   test:
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        node: [20, 22]
+        include:
+          - node: 20
+            environment: development
 
-    runs-on: ${{ matrix.os }}
+          - node: 22
+            environment: production
+
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Show OS
+      - name: Show Matrix Values
         run: |
-          echo "Running on: ${{ matrix.os }}"
-          echo "Operating System:"
-          uname -a
+          echo "Node version: ${{ matrix.node }}"
+          echo "Environment: ${{ matrix.environment }}"
