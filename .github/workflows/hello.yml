@@ -1,32 +1,18 @@
-name: Reusable Workflow
+name: Matrix Demo
 
 on:
-  workflow_call:
-    inputs:
-      username:
-        required: true
-        type: string
-
-    secrets:
-      my_secret:
-        required: true
-
-    outputs:
-      message:
-        description: "Greeting message"
-        value: ${{ jobs.hello.outputs.message }}
+  workflow_dispatch:
 
 jobs:
-  hello:
+  test:
     runs-on: ubuntu-latest
 
-    outputs:
-      message: ${{ steps.greeting.outputs.message }}
+    strategy:
+      matrix:
+        node-version: [20, 22, 24]
 
     steps:
-      - name: Greeting
-        id: greeting
+      - name: Show Node Version
         run: |
-          MESSAGE="Hello ${{ inputs.username }}!"
-          echo "message=$MESSAGE" >> "$GITHUB_OUTPUT"
-          echo "$MESSAGE"
+          echo "Testing Node.js ${{ matrix.node-version }}"
+          node --version
