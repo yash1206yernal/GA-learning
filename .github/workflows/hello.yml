@@ -11,12 +11,22 @@ on:
       my_secret:
         required: true
 
+    outputs:
+      message:
+        description: "Greeting message"
+        value: ${{ jobs.hello.outputs.message }}
+
 jobs:
   hello:
     runs-on: ubuntu-latest
 
+    outputs:
+      message: ${{ steps.greeting.outputs.message }}
+
     steps:
       - name: Greeting
+        id: greeting
         run: |
-          echo "Hello ${{ inputs.username }}!"
-          echo "Secret is: ${{ secrets.my_secret }}"
+          MESSAGE="Hello ${{ inputs.username }}!"
+          echo "message=$MESSAGE" >> "$GITHUB_OUTPUT"
+          echo "$MESSAGE"

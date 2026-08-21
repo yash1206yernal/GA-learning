@@ -12,3 +12,11 @@ jobs:
 
     secrets:
       my_secret: ${{ secrets.MY_SECRET }}
+
+  show-output:
+    needs: call-workflow
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Show returned message
+        run: "echo 'Reusable workflow returned: ${{ needs.call-workflow.outputs.message }}'"
