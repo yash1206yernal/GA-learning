@@ -1,4 +1,4 @@
-name: Matrix Include Demo
+name: Matrix Exclude Demo
 
 on:
   workflow_dispatch:
@@ -7,13 +7,15 @@ jobs:
   test:
     strategy:
       matrix:
-        node: [20, 22]
-        include:
-          - node: 20
-            environment: development
+        node: [20, 22, 24]
+        environment: [development, production]
 
-          - node: 22
+        exclude:
+          - node: 20
             environment: production
+
+          - node: 24
+            environment: development
 
     runs-on: ubuntu-latest
 
