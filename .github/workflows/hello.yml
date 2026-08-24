@@ -20,7 +20,10 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Security scan completed"
+      - name: Security scan
+        run: |
+          echo "Running Security scan "
+          exit 1
 
   deploy:
     needs: [test, security]
