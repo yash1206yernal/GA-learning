@@ -23,8 +23,7 @@ jobs:
       - name: Test
         run: |
           echo "Testing application..."
-          sleep 2
-          echo "Tests passed!"
+          echo "Running tests..."
 
   deploy:
     needs: test
