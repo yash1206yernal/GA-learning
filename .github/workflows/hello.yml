@@ -1,4 +1,4 @@
-name: Job Dependencies Demo
+name: Multiple Dependencies
 
 on:
   workflow_dispatch:
@@ -7,31 +7,23 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Build
-        run: |
-          echo "Building application..."
-          echo "Build Failed!"
-          exit 1
+      - run: echo "Build completed"
 
   test:
     needs: build
     runs-on: ubuntu-latest
-
     steps:
-      - name: Test
-        run: |
-          echo "Testing application..."
-          echo "Running tests..."
+      - run: echo "Tests completed"
+
+  security:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Security scan completed"
 
   deploy:
-    needs: test
-    if: always()
+    needs: [test, security]
     runs-on: ubuntu-latest
-
     steps:
-      - name: Deploy
-        run: |
-          echo "Deployment step completed"
-        #  echo "Deployment completed!"
+      - run: echo "Deployment completed"
