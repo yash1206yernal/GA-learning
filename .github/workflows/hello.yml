@@ -1,27 +1,37 @@
-name: Matrix Fail Fast Demo
+name: Job Dependencies Demo
 
 on:
   workflow_dispatch:
 
 jobs:
-  test:
+
+  build:
     runs-on: ubuntu-latest
 
-    strategy:
-      fail-fast: false
-      matrix:
-        version: [1, 2, 3]
+    steps:
+      - name: Build
+        run: |
+          echo "Building application..."
+          sleep 2
+          echo "Build completed!"
+
+  test:
+    needs: build
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Show Version
-        run: |
-          echo "Running version ${{ matrix.version }}"
-
       - name: Test
         run: |
-          if [ "${{ matrix.version }}" = "2" ]; then
-            echo "Version 2 failed!"
-            exit 1
-          fi
+          echo "Testing application..."
+          sleep 2
+          echo "Tests passed!"
 
-          echo "Version ${{ matrix.version }} passed!"
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy
+        run: |
+          echo "Deploying application..."
+          echo "Deployment completed!"
