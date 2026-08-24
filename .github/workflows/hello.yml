@@ -12,8 +12,8 @@ jobs:
       - name: Build
         run: |
           echo "Building application..."
-          sleep 2
-          echo "Build completed!"
+          echo "Build Failed!"
+          exit 1
 
   test:
     needs: build
